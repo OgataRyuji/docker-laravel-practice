@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Item;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,15 @@ use App\Models\Item;
 */
 
 Route::get('/', function () {
+    $dt_from = new \Carbon\Carbon();
+	$dt_from->startOfMonth();
+
+	$dt_to = new \Carbon\Carbon();
+	$dt_to->endOfMonth();
     //'UserController@test';
     //'ItemController@testitem';
-    $userCount = User::count();
+    //$userCount = User::count();
+    $userCount = User::whereBetween('created_at', [$dt_from, $dt_to])->count();
     $itemCount = Item::count();
   return view('index',[
     'userCount' => $userCount,
