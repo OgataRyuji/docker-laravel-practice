@@ -1,0 +1,61 @@
+html{
+  background-color: #f5f5f5;
+}
+body{
+  margin: 0;
+  height: 100%;
+}
+.top_page_header{
+  background-color: white;
+}
+.top_page_header p{
+  margin: 0;
+  height: 60px;
+  text-align: center;
+  padding-top: 5%;
+  font-size: 30px;
+  font-weight: bold;
+}
+.main{
+  margin: 10px;
+}
+.main_list{
+  padding: 0;
+}
+.main_list li{
+  text-align: center;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.main_list li a{
+  display: block;
+  height: 45px;
+  list-style: none;
+  background-color: white;
+  text-align: center;
+  color: #00bfff;
+  text-decoration: none;
+  font-size: 25px;
+  border-radius: 10px;
+  border: 2px solid #00bfff;
+}
+.total_user,.total_item{
+  border: 2px solid black;
+  margin-bottom: 10px;
+  background-color: white;
+}
+.total_user h4,.total_item h4{
+  text-align: center;
+}
+.total_user p,.total_item p{
+  text-align: center;
+  border-top: 2px solid black;
+  font-size: 25px;
+}
+.top_page_footer p{
+  height: 40px;
+  margin: 0;
+  text-align: center;
+  padding-top: 10px;
+  color: silver;
+}

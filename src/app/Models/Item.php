@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+    public $timestamps = false;//暗黙的にタイムスタンプをする機能をオフにする
+
+    protected $fillable = [
+        'item_title',
+        'item_explain',
+        'user_id',
+    ];
 }
