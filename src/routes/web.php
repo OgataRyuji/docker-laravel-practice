@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Item;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\Pre_userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +35,16 @@ Route::get('/', function () {
   ]);
 });
 
-//Route::get('/', [ App\Http\Controllers\UserController::class, 'test']);
-//Route::get('/', [ App\Http\Controllers\ItemController::class, 'testitem']);
+Route::get('/registration_pre',function(){
+  return view('users/registration_pre');
+});
+
+Route::post('/registration_pre', [Pre_userController::class,'addUserPre']);
+
+Route::get('/registration_main',function(){
+  return view('users/registration_main');
+});
+
+Route::get('/registration_pre_success',function(){
+  return view('users/registration_pre_success');
+});

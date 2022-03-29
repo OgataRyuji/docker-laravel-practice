@@ -1,0 +1,111 @@
+html{
+    background-color: #f5f5f5;
+  }
+  body{
+    margin: 0;
+  }
+  .registration_page_header{
+    background-color: white;
+  }
+  .registration_page_header p{
+    margin: 0;
+    height: 60px;
+    text-align: center;
+    padding-top: 5%;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .form_wrap{
+    border: 1px solid black;
+    text-align: center;
+    width: 80%;
+    margin-top: 10%;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: white;
+  }
+  .form_header{
+    border-bottom: 1px solid silver;
+  }
+  .form-group{
+    margin-top: 10px;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 10px;
+  }
+  .indispensable{
+    background-color: red;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .input-default{
+    height: 30px;
+    width: 60%;
+  }
+  .info-text{
+    font-size: 12px;
+    color: silver;
+  }
+  .register-btn{
+    margin: 20px;
+    height: 40px;
+  }
+  .register_red_btn{
+    height: 100%;
+    width: 200px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor:pointer
+  }
+  .registration_page_footer p{
+    height: 40px;
+    margin: 0;
+    text-align: center;
+    padding-top: 10px;
+    color: silver;
+  }
+
+/*以下はadmin_top.phpのみのスタイル*/
+.admin_page_header{
+  background-color: white;
+  display: flex;
+  position: relative;
+}
+.admin_page_header p{
+  margin: 0;
+  height: 60px;
+  text-align: center;
+  padding-top: 5%;
+  font-size: 30px;
+  font-weight: bold;
+  width: 50%;
+}
+.admin_page_header a{
+  position: absolute;
+  right: 10px;
+  color: #00bfff;
+  border: 2px solid #00bfff;
+  background-color: white;
+  height: 66%;
+  width: 100px;
+  margin-top: 10px;
+  cursor:pointer;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 15px;
+}
+.admin_btn{
+  border: 1px solid #00bfff;
+  text-decoration: none;
+  color: white;
+  background-color: #00bfff;
+}
+.admin_user_btn{
+  padding: 10px;
+}
+.admin_item_btn{
+  padding: 10px 25px 10px 25px;
+}
