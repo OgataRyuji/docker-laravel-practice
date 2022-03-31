@@ -53,3 +53,15 @@ Route::get('/registration_pre_success',function(){
 Route::get('/registration_main_success',function(){
   return view('users/registration_main_success');
 });
+
+Route::get('/session',[
+  UserController::class,'getlogin'
+]);
+
+Route::post('/session',[
+  UserController::class,'postlogin'
+]);
+
+Route::get('/index',function(){
+  return view('items/index');
+});

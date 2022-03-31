@@ -15,7 +15,7 @@
     <div>
       <ul class="main_list">
         <li>
-          <a href="" class="login">ログイン</a>
+          <a href="{{ url('/session') }}" class="login">ログイン</a>
         </li>
         <li>
           <a href="{{ url('/registration_pre') }}" class="sign_up_pre">新規仮登録</a>
