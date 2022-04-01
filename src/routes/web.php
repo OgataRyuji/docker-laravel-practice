@@ -75,3 +75,7 @@ Route::get('/item_new', [ItemController::class, 'getnew']);
 Route::post('/item_new', [ItemController::class, 'postitem']);
 
 Route::get('/detail', [ItemController::class, 'getdetail']);
+
+Route::get('/edit_item', [ItemController::class, 'getedit']);
+
+Route::post('/edit_item', [ItemController::class, 'updateitem']);

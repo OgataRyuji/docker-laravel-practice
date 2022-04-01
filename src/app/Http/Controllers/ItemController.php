@@ -7,6 +7,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class ItemController extends Controller
 {
@@ -44,10 +45,34 @@ class ItemController extends Controller
 
 	public function getdetail()
 	{
-		$user_id = $_GET['user_id'];
     $item_id = $_GET['item_id'];
-		$post_user = $_GET['post_user'];
 		$item = Item::where('id',$item_id)->get();
 		return view('items.detail')->with('item',$item);
+	}
+
+	public function getedit()
+	{
+    $item_id = $_GET['item_id'];
+		$item = Item::where('id',$item_id)->get();
+		return view('items.edit_item')->with('item',$item);
+	}
+
+	public function updateitem(Request $request)
+	{
+		//バリデーション
+		$rules = [
+			'item_title' => ['required','string'],
+			'item_explain' => ['required','string']
+    ];
+		$this->validate($request, $rules);
+
+    $item = Item::find($request->edit_item_id);
+		$item->item_title = $request->item_title;
+		$item->item_explain = $request->item_explain;
+		$item->created_at = now();
+		$item->user_id = Session::get('user_id');
+		$item->save();
+
+		return redirect('/index');
 	}
 }
