@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request;
 use App\Http\Controllers\Pre_userController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,16 @@ Route::get('/session',[
 Route::post('/session',[
   UserController::class,'postlogin'
 ]);
-
+/*
 Route::get('/index',function(){
+	[ItemController::class, 'showitem'];
   return view('items/index');
 });
+*/
+Route::get('/index', [ItemController::class, 'showitem']);
+
+Route::get('/item_new', [ItemController::class, 'getnew']);
+
+Route::post('/item_new', [ItemController::class, 'postitem']);
+
+Route::get('/detail', [ItemController::class, 'getdetail']);

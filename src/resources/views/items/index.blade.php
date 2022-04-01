@@ -1,13 +1,13 @@
 <?php
   use Illuminate\Support\Facades\Session;
-  echo Session::get('user_id');
+  $login_user = Session::get('user_id');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../public/css/show_item.css">
+  <link rel="stylesheet" href="{{asset('/assets/css/show_item.css')}}">
   <title>PHPの学習</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
     </div>
     <div class="link-box">
       <a href="../users/mypage.php?user_id=<?php //echo $id?>" class="go-mypage">マイページ</a>
-      <a href="./new.php" class="go-new-item">投稿する</a>
+      <a href="/item_new" class="go-new-item">投稿する</a>
       <a href="../users/logout.php?user_id=<?php //echo $id;?>" class="logout-btn">ログアウト</a>
     </div>
   </header>
@@ -33,7 +33,19 @@
       <input type="hidden" name="token" value="<?php //echo htmlspecialchars($_SESSION['token']) ?>">
     </form>
     <div class="contents">
-      <?php //echo $member; ?>
+      @foreach($items as $item)
+        <a href="/detail?user_id={{$login_user}}&item_id={{$item->id}}&post_user={{$item->user_id}}">
+          <div class="content-post">
+            <div class="content-title">
+              <h2>{{ $item->item_title }}</h2>
+              <p>{{ $item->user->nickname }}</p>
+            </div>
+            <div class="content-explain">
+              <p>{{ $item->item_explain }}</p>
+            </div>
+          </div>
+        </a>
+      @endforeach
     </div>
   </div>
 
