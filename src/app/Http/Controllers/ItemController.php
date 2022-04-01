@@ -75,4 +75,17 @@ class ItemController extends Controller
 
 		return redirect('/index');
 	}
+
+	public function getdelete()
+	{
+    $item_id = $_GET['item_id'];
+		$item = Item::where('id',$item_id)->get();
+		return view('items.delete')->with('item',$item);
+	}
+
+	public function deleteitem(Request $request)
+	{
+    Item::find($request->item_id)->delete();
+		return redirect('/index');
+	}
 }
