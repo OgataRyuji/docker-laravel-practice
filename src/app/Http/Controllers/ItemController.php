@@ -88,4 +88,11 @@ class ItemController extends Controller
     Item::find($request->item_id)->delete();
 		return redirect('/index');
 	}
+
+	public function getmypage()
+	{
+		$user_id = $_GET['user_id'];
+		$items = Item::where('user_id',$user_id)->get();
+		return view('users.mypage')->with('items',$items);
+	}
 }

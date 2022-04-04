@@ -83,3 +83,9 @@ Route::post('/edit_item', [ItemController::class, 'updateitem']);
 Route::get('/delete', [ItemController::class, 'getdelete']);
 
 Route::post('/delete', [ItemController::class, 'deleteitem']);
+
+Route::get('/mypage', [ItemController::class, 'getmypage'])->name('users.mypage');
+
+Route::get('/edit_user', [UserController::class, 'getedit']);
+
+Route::post('/edit_user', [UserController::class, 'updateuser']);

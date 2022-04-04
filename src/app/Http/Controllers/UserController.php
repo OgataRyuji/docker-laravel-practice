@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Item;
 
 use Illuminate\Http\Request;
 use App\Mail\SendRegistrationMainMail;
@@ -56,4 +57,30 @@ class UserController extends Controller
 			return redirect('/session');
 		}
   }
+
+	public function getedit()
+	{
+		$user_id = $_GET['user_id'];
+		$user = User::where('id',$user_id)->get();
+		return view('users.edit_user')->with('user',$user);
+	}
+
+	public function updateuser(Request $request)
+	{
+		//バリデーション
+		$rules = [
+			'nickname' => ['required',  'string', 'min:5'],
+			'password' => ['required', 'regex: /^[0-9a-zA-Z]{10,}$/']
+		];
+		$this->validate($request, $rules);
+
+    $user = User::find($request->user_id);
+		$user->nickname = $request->nickname;
+		$user->password = Hash::make($request->password);
+		$user->created_at = now();
+		$user->save();
+
+		return redirect()->route('users.mypage',['user_id'=>$request->user_id]);
+	}
+
 }
