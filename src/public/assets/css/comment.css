@@ -1,0 +1,65 @@
+html{
+	background-color: #f5f5f5;
+}
+body{
+	margin: 0;
+}
+.edit_page_header{
+	background-color: white;
+}
+.edit_page_header p{
+	margin: 0;
+	height: 60px;
+	text-align: center;
+	padding-top: 5%;
+	font-size: 30px;
+	font-weight: bold;
+}
+.form-wrap{
+	border: 1px solid black;
+	text-align: center;
+	width: 80%;
+	margin-top: 10%;
+	margin-right: 10%;
+	margin-left: 10%;
+	background-color: white;
+}
+.form-header{
+	border-bottom: 1px solid silver;
+}
+.form-group{
+	margin-top: 10px;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-bottom: 10px;
+}
+.indispensable{
+	background-color: red;
+	color: white;
+	padding: 2px;
+	border-radius: 5px;
+	font-size: 12px;
+}
+.input-default{
+	height: 30px;
+	width: 60%;
+}
+.edit-btn{
+	margin: 20px;
+	height: 40px;
+}
+.edit-red-btn{
+	height: 100%;
+	width: 200px;
+	background-color: red;
+	color: white;
+	border: none;
+	cursor:pointer
+}
+.edit_page_footer p{
+	height: 40px;
+	margin: 0;
+	text-align: center;
+	padding-top: 10px;
+	color: silver;
+}

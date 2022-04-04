@@ -91,3 +91,7 @@ Route::get('/mypage', [ItemController::class, 'getmypage'])->name('users.mypage'
 Route::get('/edit_user', [UserController::class, 'getedit']);
 
 Route::post('/edit_user', [UserController::class, 'updateuser']);
+
+Route::get('/edit_comment', [CommentController::class, 'getedit']);
+
+Route::post('/edit_comment', [CommentController::class, 'updateComment']);

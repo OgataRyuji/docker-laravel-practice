@@ -23,7 +23,7 @@
       <p class="items-page-title">サイトタイトル</p>
     </div>
     <div class="link-box">
-      <a href="../users/edit.php" class="change-user-info">ユーザー情報変更</a>
+      <a href="/edit_user?user_id={{$login_user}}" class="change-user-info">ユーザー情報変更</a>
       <a href="../users/logout.php?user_id=<?php //echo $id;?>" class="logout-btn">ログアウト</a>
     </div>
   </header>
@@ -59,7 +59,7 @@
         <p class="comment-text">:{{$comment->text}}</p>
         <p class="comment-created-at">{{$comment->created_at}}</p>
         <div class="comment-link-box">
-          <a href="" class="comment-edit-btn" name='comment-edit-btn'>編集</a><br>
+          <a href="/edit_comment?user_id={{$login_user}}&item_id={{$item_id}}&post_user={{$post_user}}&comment_id={{$comment->id}}&comment_user={{$comment->user_id}}" class="comment-edit-btn" name='comment-edit-btn'>編集</a><br>
           <a href="" class="comment-delete-btn" name='comment-delete-btn'>削除</a>
         </div>
       </div>
