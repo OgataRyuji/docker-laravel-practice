@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
@@ -47,7 +48,11 @@ class ItemController extends Controller
 	{
     $item_id = $_GET['item_id'];
 		$item = Item::where('id',$item_id)->get();
-		return view('items.detail')->with('item',$item);
+		$comments = Comment::orderBy('created_at', 'DESC')->get();
+		return view('items.detail')->with([
+      'item'=>$item,
+			'comments'=>$comments
+		]);
 	}
 
 	public function getedit()

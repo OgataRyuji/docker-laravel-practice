@@ -53,11 +53,32 @@
   <div class="comment-area">
     <div class="comments">
       <?php //echo $member2; ?>
+      @foreach($comments as $comment)
+      <div class="comment">
+        <p class="comment-nickname">{{$comment->user->nickname}}</p>
+        <p class="comment-text">:{{$comment->text}}</p>
+        <p class="comment-created-at">{{$comment->created_at}}</p>
+        <div class="comment-link-box">
+          <a href="" class="comment-edit-btn" name='comment-edit-btn'>編集</a><br>
+          <a href="" class="comment-delete-btn" name='comment-delete-btn'>削除</a>
+        </div>
+      </div>
+      @endforeach
     </div>
-    <form action="detail.php" method="POST" class="input-comment-form">
-      <input type="text" class="input-comment" name="input-comment">
+    <form action="/detail" method="POST" class="input-comment-form">
+    @csrf
+    @if ($errors->any())
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+    @endif
+      <input type="text" class="input-comment" name="comment">
       <input type="submit" class="send-comment-btn" name="send-comment-btn" value="コメント">
-      <input type="hidden" name="comment-item-id" value="<?php //echo $_GET['item_id'];?>">
+      <input type="hidden" name="user_id" value="{{$_GET['item_id']}}">
+      <input type="hidden" name="item_id" value="{{$_GET['item_id']}}">
+      <input type="hidden" name="item_post_user" value="{{$_GET['post_user']}}">
       <input type="hidden" name="token" value="<?php //echo htmlspecialchars($_SESSION['token']) ?>">
     </form>
   </div>

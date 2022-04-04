@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Request;
 use App\Http\Controllers\Pre_userController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +75,8 @@ Route::get('/item_new', [ItemController::class, 'getnew']);
 
 Route::post('/item_new', [ItemController::class, 'postitem']);
 
-Route::get('/detail', [ItemController::class, 'getdetail']);
+Route::get('/detail', [ItemController::class, 'getdetail'])->name('items.detail');
+Route::post('/detail', [CommentController::class, 'addComment']);
 
 Route::get('/edit_item', [ItemController::class, 'getedit']);
 

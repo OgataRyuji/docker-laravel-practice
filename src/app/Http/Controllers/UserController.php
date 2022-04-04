@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Item;
 
 use Illuminate\Http\Request;
 use App\Mail\SendRegistrationMainMail;
