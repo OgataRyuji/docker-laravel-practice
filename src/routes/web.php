@@ -95,3 +95,7 @@ Route::post('/edit_user', [UserController::class, 'updateuser']);
 Route::get('/edit_comment', [CommentController::class, 'getedit']);
 
 Route::post('/edit_comment', [CommentController::class, 'updateComment']);
+
+Route::get('/delete_comment', [CommentController::class, 'getDelete']);
+
+Route::post('/delete_comment', [CommentController::class, 'deleteComment']);

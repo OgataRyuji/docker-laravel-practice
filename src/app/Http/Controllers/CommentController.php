@@ -52,4 +52,17 @@ class CommentController extends Controller
 
 		return redirect()->route('items.detail',['user_id'=>$request->session()->get('user_id'), 'item_id'=>$request->item_id, 'post_user'=>$request->post_user]);
 	}
+
+	public function getDelete()
+	{
+    $comment_id = $_GET['comment_id'];
+		$comment = Comment::where('id',$comment_id)->get();
+		return view('comments.delete_comment')->with('comment',$comment);
+	}
+
+	public function deleteComment(Request $request)
+	{
+    Comment::find($request->comment_id)->delete();
+		return redirect()->route('items.detail',['user_id'=>$request->session()->get('user_id'), 'item_id'=>$request->item_id, 'post_user'=>$request->post_user]);
+	}
 }

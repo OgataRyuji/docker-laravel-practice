@@ -60,7 +60,7 @@
         <p class="comment-created-at">{{$comment->created_at}}</p>
         <div class="comment-link-box">
           <a href="/edit_comment?user_id={{$login_user}}&item_id={{$item_id}}&post_user={{$post_user}}&comment_id={{$comment->id}}&comment_user={{$comment->user_id}}" class="comment-edit-btn" name='comment-edit-btn'>編集</a><br>
-          <a href="" class="comment-delete-btn" name='comment-delete-btn'>削除</a>
+          <a href="/delete_comment?user_id={{$login_user}}&item_id={{$item_id}}&post_user={{$post_user}}&comment_id={{$comment->id}}&comment_user={{$comment->user_id}}" class="comment-delete-btn" name='comment-delete-btn'>削除</a>
         </div>
       </div>
       @endforeach
