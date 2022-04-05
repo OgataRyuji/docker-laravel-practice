@@ -99,3 +99,7 @@ Route::post('/edit_comment', [CommentController::class, 'updateComment']);
 Route::get('/delete_comment', [CommentController::class, 'getDelete']);
 
 Route::post('/delete_comment', [CommentController::class, 'deleteComment']);
+
+Route::get('/logout', [UserController::class, 'getLogout']);
+
+Route::post('/logout', [UserController::class, 'logout']);

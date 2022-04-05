@@ -21,7 +21,7 @@
         <a href="../admin/admin_top.php?user_id=<?php //echo $id;?>" class="owner_btn">管理者ページ</a>
       <?php //}?>
       <a href="/edit_user?user_id={{$login_user}}" class="change-user-info">ユーザー情報変更</a>
-      <a href="./logout.php?user_id=<?php //echo $id;?>" class="mypage-logout-btn">ログアウト</a>
+      <a href="/logout?user_id={{$login_user}}" class="mypage-logout-btn">ログアウト</a>
     </div>
   </header>
   <div class="main">

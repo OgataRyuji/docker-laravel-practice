@@ -24,7 +24,7 @@
     </div>
     <div class="link-box">
       <a href="/edit_user?user_id={{$login_user}}" class="change-user-info">ユーザー情報変更</a>
-      <a href="../users/logout.php?user_id=<?php //echo $id;?>" class="logout-btn">ログアウト</a>
+      <a href="/logout?user_id={{$login_user}}" class="logout-btn">ログアウト</a>
     </div>
   </header>
   <div class="main">

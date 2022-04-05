@@ -82,4 +82,15 @@ class UserController extends Controller
 		return redirect()->route('users.mypage',['user_id'=>$request->user_id]);
 	}
 
+	public function getLogout()
+	{
+		return view('users.logout');
+	}
+
+	public function logout()
+	{
+    session()->flush();
+		return redirect('/');
+	}
+
 }
