@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 
+use Illuminate\Pagination\Paginator;
+
 class ItemController extends Controller
 {
 	public function showitem()
 	{
-		$items = Item::orderBy('created_at', 'DESC')->get();
+		$items = Item::orderBy('created_at', 'DESC')->paginate(4);
 		return view('items.index')->with('items',$items);
 	}
 
@@ -48,7 +50,7 @@ class ItemController extends Controller
 	{
     $item_id = $_GET['item_id'];
 		$item = Item::where('id',$item_id)->get();
-		$comments = Comment::orderBy('created_at', 'DESC')->get();
+		$comments = Comment::where('item_id',$item_id)->orderBy('created_at', 'DESC')->get();
 		return view('items.detail')->with([
       'item'=>$item,
 			'comments'=>$comments
@@ -97,7 +99,7 @@ class ItemController extends Controller
 	public function getmypage()
 	{
 		$user_id = $_GET['user_id'];
-		$items = Item::where('user_id',$user_id)->get();
+		$items = Item::where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
 		return view('users.mypage')->with('items',$items);
 	}
 }

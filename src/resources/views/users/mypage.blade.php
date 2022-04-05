@@ -26,7 +26,6 @@
   </header>
   <div class="main">
     <div class="contents">
-      <?php //echo $member; ?>
       @foreach($items as $item)
         <a href="/detail?user_id={{$login_user}}&item_id={{$item->id}}&post_user={{$item->user_id}}">
           <div class="content-post">
@@ -41,29 +40,6 @@
         </a>
       @endforeach
     </div>
-  </div>
-
-  <p class="form-to"><?php //echo $count['cnt']; ?>件中 <?php //echo $from_record; ?> - <?php //echo $to_record;?> 件目を表示</p>
-  <div class="pagination">
-    <?php //if($page >= 2): ?>
-      <a href="mypage.php?page=<?php //echo($page - 1);?>" class="page-feed">&laquo;</a>
-    <?php //else : ;?>
-      <span class="first-last-page">&laquo;</span>
-    <?php //endif; ?>
-    <?php //for($i = 1; $i <= $max_page; $i++) : ?>
-      <?php //if($i >= $page - $range && $i <= $page + $range) : ?>
-        <?php //if($i === $page) : ?>
-          <span class="now-page-number"><?php //echo $i; ?></span>
-        <?php //else: ?>
-          <a href="?page=<?php //echo $i; ?>" class="page-number"><?php //echo $i; ?></a>
-        <?php //endif; ?>
-      <?php //endif; ?>
-    <?php //endfor; ?>
-    <?php //if($page < $max_page) : ?>
-      <a href="mypage.php?page=<?php //echo($page + 1); ?>" class="page-feed">&raquo;</a>
-    <?php //else : ?>
-      <span class="forst-last-page">&raquo;</span>
-    <?php //endif; ?>
   </div>
   <footer class="items-index-page-footer">
     <p>
