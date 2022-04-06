@@ -103,3 +103,5 @@ Route::post('/delete_comment', [CommentController::class, 'deleteComment']);
 Route::get('/logout', [UserController::class, 'getLogout']);
 
 Route::post('/logout', [UserController::class, 'logout']);
+
+Route::get('/index', [ItemController::class, 'searchItem']);

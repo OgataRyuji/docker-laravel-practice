@@ -37,11 +37,11 @@
   </header>
   <div class="main">
     <h2 class="form-title">検索</h2>
-    <form action="../items/serch.php" method="GET" class="serch-form">
+    <form action="{{url('/index')}}" method="GET" class="serch-form">
       <label for="">記事タイトル：</label>
-      <input type="text" name="serch_item_title"><br>
+      <input type="text" name="serch_title"><br>
       <label for="">記事内容：</label>
-      <input type="text" name="serch_item_explain"><br>
+      <input type="text" name="search_explain"><br>
       <input type="submit" name="serch-submit" value="記事を検索する">
       <input type="hidden" name="token" value="<?php //echo htmlspecialchars($_SESSION['token']) ?>">
     </form>
@@ -61,7 +61,7 @@
       @endforeach
     </div>
   </div>
-  {{ $items->links() }}
+  {{ $items->appends(request()->input())->links() }}
   <footer class="items-index-page-footer">
     <p>
       Copyright Website 2022.

@@ -103,6 +103,47 @@ body{
   padding-top: 10px;
   color: silver;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+  }
+.page-feed {
+  width: 30px;
+  margin: 0 10px;
+  padding: 5px 10px;
+  text-align: center;
+  background: #b8b8b8;
+  color: black;
+}
+.first-last-page {
+  width: 30px;
+  margin: 0 10px;
+  padding: 5px 10px;
+  text-align: center;
+  background: #f0f0f0;
+  color: black;
+}
+.page-number {
+  width: 30px;
+  margin: 0 10px;
+  padding: 5px;
+  text-align: center;
+  background: #b8b8b8;
+  color: black;
+}
+.now-page-number {
+  width: 30px;
+  margin: 0 10px;
+  padding: 5px;
+  text-align: center;
+  background: #f0f0f0;
+  color: black;
+  font-weight: bold;
+}
+.form-to{
+  text-align: center;
+}
 /*以下はmypage.phpのみのスタイル*/
 .change-user-info{
   position: absolute;

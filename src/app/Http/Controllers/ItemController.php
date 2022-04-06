@@ -102,4 +102,12 @@ class ItemController extends Controller
 		$items = Item::where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
 		return view('users.mypage')->with('items',$items);
 	}
+
+	public function searchItem(Request $request)
+	{
+		$searchTitle = $request->serch_title;
+		$searchExplain = $request->search_explain;
+		$items = Item::where('item_title','LIKE','%'.$searchTitle.'%')->where('item_explain','LIKE','%'.$searchExplain.'%')->orderBy('created_at', 'DESC')->paginate(4);
+		return view('items.index')->with('items',$items);
+	}
 }
