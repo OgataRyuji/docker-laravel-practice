@@ -1,7 +1,10 @@
 <?php
   use App\Models\Pre_user;
+  use Illuminate\Support\Facades\Cookie;
 
   $user_id = $_GET['user_id'];
+  //Cookie::queue('user_id', $id);
+  //$user_id = (int)Cookie::get('user_id');
   $user_email = Pre_user::where('id', $user_id)->value('email');
 ?>
 <!DOCTYPE html>
