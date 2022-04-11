@@ -28,7 +28,7 @@ Route::get('/', function () {
 	$dt_to = new \Carbon\Carbon();
 	$dt_to->endOfMonth();
   $userCount = User::whereBetween('created_at', [$dt_from, $dt_to])->count();
-  $itemCount = Item::count();
+  $itemCount = Item::whereBetween('created_at', [$dt_from, $dt_to])->count();
 
 	return view('index',[
     'userCount' => $userCount,

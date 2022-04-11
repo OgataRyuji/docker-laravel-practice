@@ -1,3 +1,10 @@
+<?php
+  use Illuminate\Support\Facades\Session;
+  $login_user = Session::get('user_id');
+  if ($login_user < 1) {
+    header('Location: /');
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
   <head>

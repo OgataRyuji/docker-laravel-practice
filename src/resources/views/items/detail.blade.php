@@ -4,6 +4,9 @@
   $post_user = (integer)$_GET['post_user'];
   $user_id = $_GET['user_id'];
   $item_id = $_GET['item_id'];
+  if ($login_user < 1) {
+    header('Location: /');
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
