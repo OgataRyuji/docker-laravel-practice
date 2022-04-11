@@ -93,4 +93,9 @@ class UserController extends Controller
 		return redirect('/');
 	}
 
+	public function getAdminTop()
+	{
+		return view('admin.admin_top');
+	}
+
 }

@@ -105,3 +105,5 @@ Route::get('/logout', [UserController::class, 'getLogout']);
 Route::post('/logout', [UserController::class, 'logout']);
 
 Route::get('/index', [ItemController::class, 'searchItem']);
+
+Route::get('/admin_top', [UserController::class, 'getAdminTop']);

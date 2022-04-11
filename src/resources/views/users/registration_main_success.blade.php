@@ -60,7 +60,7 @@
   <header class="registration_page_header">
     <p>サイトタイトル</p>
   </header>
-  <form class="form_wrap" action="/session" method="POST">
+  <form class="form_wrap" action="/session" method="GET">
     <div class="form_header">
       <h1 class="form_header_text">
         本会員登録完了
