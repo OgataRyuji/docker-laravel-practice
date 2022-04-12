@@ -1,3 +1,10 @@
+<?php
+  use Illuminate\Support\Facades\Session;
+  $login_user = (integer)Session::get('user_id');
+  if ($login_user !== 16) {
+    header('Location: /');
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,19 +17,19 @@
   <!-- 下記に課題を書く -->
   <header class="admin_page_header">
     <p>サイトタイトル</p>
-    <a href="../items/index.php?user_id=<?php //echo $id;?>">アイテム一覧ページ</a>
+    <a href="/index?user_id={{$login_user}}">アイテム一覧ページ</a>
   </header>
-  <form class="form_wrap" action="../../../app/Http/Models/registration_pre_action.php" method="POST">
+  <form class="form_wrap" action="/admin_top" method="GET">
     <div class="form_header">
       <h1 class="form_header_text">
         管理者トップページ
       </h1>
     </div>
     <div class='register-btn'>
-      <a href="./admin_user_data.php?user_id=<?php //echo $sessionId;?>" class="admin_btn admin_user_btn">ユーザーデータ管理画面</a>
+      <a href="/admin_user?user_id={{$login_user}}" class="admin_btn admin_user_btn">ユーザーデータ管理画面</a>
     </div>
     <div class='register-btn'>
-      <a href="./admin_item_data.php?user_id=<?php //echo $sessionId;?>" class="admin_btn admin_item_btn">投稿データ管理画面</a>
+      <a href="/admin_item?user_id={{$login_user}}" class="admin_btn admin_item_btn">投稿データ管理画面</a>
     </div>
   </form>
   <footer class="registration_page_footer">

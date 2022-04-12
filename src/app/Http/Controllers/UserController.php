@@ -98,4 +98,9 @@ class UserController extends Controller
 		return view('admin.admin_top');
 	}
 
+	public function getAdminUser()
+	{
+		return view('admin.admin_user_data');
+	}
+
 }

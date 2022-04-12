@@ -110,4 +110,9 @@ class ItemController extends Controller
 		$items = Item::where('item_title','LIKE','%'.$searchTitle.'%')->where('item_explain','LIKE','%'.$searchExplain.'%')->orderBy('created_at', 'DESC')->paginate(4);
 		return view('items.index')->with('items',$items);
 	}
+
+	public function getAdminItem()
+	{
+		return view('admin.admin_item_data');
+	}
 }
