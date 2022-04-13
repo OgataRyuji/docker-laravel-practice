@@ -12,6 +12,7 @@
     <p>サイトタイトル</p>
   </header>
   <form class='form_wrap' action="/admin_user" method="POST">
+		@csrf
     <div class='form_header'>
       <h1 class='form_header_text'>
         ユーザーデータエクスポート

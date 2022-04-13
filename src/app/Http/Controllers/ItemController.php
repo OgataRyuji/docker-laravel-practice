@@ -115,4 +115,66 @@ class ItemController extends Controller
 	{
 		return view('admin.admin_item_data');
 	}
+
+	public function csvExport()
+	{
+		$dt_from = new \Carbon\Carbon();
+    $dt_from->startOfMonth();
+
+    $dt_to = new \Carbon\Carbon();
+    $dt_to->endOfMonth();
+
+    //ファイル名
+    $filename = 'laravel_item_data.csv';
+    if (!$fp = fopen($filename, 'w')) {
+      echo "Cannot open file ($filename)";
+      exit;
+    }
+		$items = Item::whereBetween('created_at',[$dt_from, $dt_to])->get();
+		foreach ($items as $item) {
+			$output_text  = '"';
+			$output_text .= $item['id'];
+			$output_text .= '","' . $item['item_title'];
+			$output_text .= '","' . $item['item_explain'];
+			$output_text .= '","' . $item['created_at'];
+			$output_text .= '","' . $item['user_id'];
+			$output_text .= '"';
+			$output_text .= "\n";
+
+			if (fwrite($fp, mb_convert_encoding($output_text, "UTF-8")) === false) {
+					break;
+			}
+		}
+		fclose($fp);
+
+		/* ファイルの存在確認 */
+		if (!file_exists($filename)){
+			die("Error: File(".$filename.") does not exist");
+		}
+		/* オープンできるか確認 */
+		if (!($fp = fopen($filename, "r"))){
+			die("Error: Cannot open the file(".$filename.")");
+		}
+		fclose($fp);
+
+		/* ファイルサイズの確認 */
+		if (($content_length = filesize($filename)) === 0){
+			die("Error: File size is 0.(".$filename.")");
+		}
+
+		/* ダウンロード用のHTTPヘッダー送信 */
+		header("Cache-Control: private");
+		header("Pragma: private");
+		header('Content-Description: File Transfer');
+		header("Content-Disposition: inline; filename=\"".basename($filename)."\"");
+		header("Content-Length: ".$content_length);
+		header("Content-Type: application/octet-stream");
+		header('Content-Transfer-Encoding: binary');
+
+		/* ファイルを読んで出力 */
+		if (!readfile($filename)){
+			die("Cannot read the file(".$filename.")");
+		}
+		return redirect('/admin_item');
+	}
 }

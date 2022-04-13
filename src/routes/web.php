@@ -22,7 +22,7 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/', function () {
-    $dt_from = new \Carbon\Carbon();
+  $dt_from = new \Carbon\Carbon();
 	$dt_from->startOfMonth();
 
 	$dt_to = new \Carbon\Carbon();
@@ -110,4 +110,8 @@ Route::get('/admin_top', [UserController::class, 'getAdminTop']);
 
 Route::get('/admin_user', [UserController::class, 'getAdminUser']);
 
+Route::post('/admin_user', [UserController::class, 'csvExport']);
+
 Route::get('/admin_item', [ItemController::class, 'getAdminItem']);
+
+Route::post('/admin_item', [ItemController::class, 'csvExport']);
