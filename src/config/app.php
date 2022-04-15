@@ -191,7 +191,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'LexerConfig' => Goodby\CSV\Import\Standard\LexerConfig::class
     ])->toArray(),
 
 ];

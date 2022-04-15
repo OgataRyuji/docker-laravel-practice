@@ -106,12 +106,12 @@ Route::post('/logout', [UserController::class, 'logout']);
 
 Route::get('/index', [ItemController::class, 'searchItem']);
 
-Route::get('/admin_top', [UserController::class, 'getAdminTop']);
+Route::get('/admin_top', [UserController::class, 'getAdminTop'])->name('admin_top');
 
-Route::get('/admin_user', [UserController::class, 'getAdminUser']);
+Route::get('/admin_user', [UserController::class, 'getAdminUser'])->name('admin_user');;
 
-Route::post('/admin_user', [UserController::class, 'csvExport']);
+Route::post('/admin_user', [UserController::class, 'csv']);
 
-Route::get('/admin_item', [ItemController::class, 'getAdminItem']);
+Route::get('/admin_item', [ItemController::class, 'getAdminItem'])->name('admin_item');
 
-Route::post('/admin_item', [ItemController::class, 'csvExport']);
+Route::post('/admin_item', [ItemController::class, 'csv']);

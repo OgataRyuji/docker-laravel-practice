@@ -1,7 +1,7 @@
 <?php
   use Illuminate\Support\Facades\Session;
   $login_user = (integer)Session::get('user_id');
-  if ($login_user !== 16) {
+  if ($login_user !== 1) {
     header('Location: /');
   }
 ?>

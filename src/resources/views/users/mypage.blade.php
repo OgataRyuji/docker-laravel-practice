@@ -20,7 +20,7 @@
       <p class="items-page-title">サイトタイトル</p>
     </div>
     <div class="link-box">
-      @if($login_user === 16)
+      @if($login_user === 1)
         <a href="/admin_top?user_id={{$login_user}}" class="owner_btn">管理者ページ</a>
       @endif
       <a href="/edit_user?user_id={{$login_user}}" class="change-user-info">ユーザー情報変更</a>
