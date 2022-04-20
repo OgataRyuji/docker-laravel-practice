@@ -6,24 +6,27 @@ use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Session;
-
 class CommentController extends Controller
 {
+	private $comment;
+	public function __construct()
+	{
+		$this->comment = new Comment();
+	}
 	public function addComment(Request $request)
 	{
-		$comment = new Comment;
-/*
+  /*
 		$rules = [
 			'text' => ['required',  'string']
 		];
 		$this->validate($request, $rules);
-*/
-		$comment->text = $request->comment;
-		$comment->created_at = now();
-		$comment->user_id = $request->session()->get('user_id');
-		$comment->item_id = $request->item_id;
-		$comment->save();
+  */
+		$text = $request->comment;
+		$created_at = now();
+		$user_id = $request->session()->get('user_id');
+		$item_id = $request->item_id;
+
+		$comment = $this->comment->insertComment($text, $created_at, $user_id, $item_id);
 
 		return redirect()->route('items.detail',['user_id'=>$request->session()->get('user_id'), 'item_id'=>$request->item_id, 'post_user'=>$request->item_post_user]);
 	}
@@ -31,7 +34,7 @@ class CommentController extends Controller
 	public function getedit()
 	{
     $comment_id = $_GET['comment_id'];
-		$comment = Comment::where('id',$comment_id)->get();
+		$comment = $this->comment->getComment($comment_id);
 		return view('comments.edit_comment')->with('comment',$comment);
 	}
 
@@ -43,12 +46,11 @@ class CommentController extends Controller
 		];
 		$this->validate($request, $rules);
     */
+		$comment_id = $request->comment_id;
+		$text = $request->edit_comment;
+		$created_at = now();
 
-    $comment = Comment::find($request->comment_id);
-		$comment->text = $request->edit_comment;
-		$comment->created_at = now();
-		//$comment->user_id = Session::get('user_id');
-		$comment->save();
+		$comment = $this->comment->updateComment($comment_id, $text, $created_at);
 
 		return redirect()->route('items.detail',['user_id'=>$request->session()->get('user_id'), 'item_id'=>$request->item_id, 'post_user'=>$request->post_user]);
 	}
@@ -56,13 +58,14 @@ class CommentController extends Controller
 	public function getDelete()
 	{
     $comment_id = $_GET['comment_id'];
-		$comment = Comment::where('id',$comment_id)->get();
+		$comment = $this->comment->getComment($comment_id);
 		return view('comments.delete_comment')->with('comment',$comment);
 	}
 
 	public function deleteComment(Request $request)
 	{
-    Comment::find($request->comment_id)->delete();
+		$comment_id = $request->comment_id;
+		$comment = $this->comment->deleteComment($comment_id);
 		return redirect()->route('items.detail',['user_id'=>$request->session()->get('user_id'), 'item_id'=>$request->item_id, 'post_user'=>$request->post_user]);
 	}
 }

@@ -7,16 +7,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\SendRegistrationMainMail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+	private $user;
+	public function __construct()
+	{
+		$this->user = new User();
+	}
   public function addUser(Request $request)
   {
-    $user = new User;
-
     $rules = [
       'nickname' => ['required',  'string', 'min:5'],
       'email' => ['required', 'email', 'unique:users'],
@@ -24,13 +25,11 @@ class UserController extends Controller
     ];
     $this->validate($request, $rules);
 
-    $user->nickname = $request->nickname;
-    $user->email = $request->email;
-    $user->password = Hash::make($request->password);
-    $user->created_at = now();
-    $user->save();
-
+		$nickname = $request->nickname;
+    $password = $request->password;
     $email = $request->email;
+		$created_at = now();
+		$user = $this->user->insertUser($nickname, $email, $password, $created_at);
     Mail::send(new SendRegistrationMainMail($email));
 
     return redirect('/registration_main_success');
@@ -48,20 +47,20 @@ class UserController extends Controller
 		];
 		$this->validate($request, $rules);
 
-		$hashedPassword = User::where('email', $request->email)->value('password');
-		$user_id = User::where('email', $request->email)->value('id');
-		if (password_verify($request->password, $hashedPassword)) {
-			Session::put('user_id',$user_id);
+		$email = $request->email;
+		$password = $request->password;
+		$user = $this->user->login($email, $password);
+		if ($user) {
 			return redirect('/index');
-		}else{
-			return redirect('/session');
+		}elseif(!$user){
+      return redirect('/session');
 		}
   }
 
 	public function getedit()
 	{
 		$user_id = $_GET['user_id'];
-		$user = User::where('id',$user_id)->get();
+		$user = $this->user->editUser($user_id);
 		return view('users.edit_user')->with('user',$user);
 	}
 
@@ -74,11 +73,11 @@ class UserController extends Controller
 		];
 		$this->validate($request, $rules);
 
-    $user = User::find($request->user_id);
-		$user->nickname = $request->nickname;
-		$user->password = Hash::make($request->password);
-		$user->created_at = now();
-		$user->save();
+		$user_id = $request->user_id;
+		$nickname = $request->nickname;
+		$password = $request->password;
+		$created_at = now();
+		$user = $this->user->updateUser($user_id, $nickname, $password, $created_at);
 
 		return redirect()->route('users.mypage',['user_id'=>$request->user_id]);
 	}

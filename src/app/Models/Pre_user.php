@@ -12,5 +12,14 @@ class Pre_user extends Model
 
 	protected $fillable = [
 		'email',
+		'created_at',
 	];
+
+	public function insertPreUser($email, $created_at)
+	{
+    return $this->create([
+      'email'=>$email,
+			'created_at'=>$created_at,
+		]);
+	}
 }

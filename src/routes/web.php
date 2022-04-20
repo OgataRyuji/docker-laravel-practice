@@ -63,12 +63,7 @@ Route::get('/session',[
 Route::post('/session',[
   UserController::class,'postlogin'
 ]);
-/*
-Route::get('/index',function(){
-	[ItemController::class, 'showitem'];
-  return view('items/index');
-});
-*/
+
 Route::get('/index', [ItemController::class, 'showitem']);
 
 Route::get('/item_new', [ItemController::class, 'getnew']);
@@ -103,8 +98,6 @@ Route::post('/delete_comment', [CommentController::class, 'deleteComment']);
 Route::get('/logout', [UserController::class, 'getLogout']);
 
 Route::post('/logout', [UserController::class, 'logout']);
-
-Route::get('/index', [ItemController::class, 'searchItem']);
 
 Route::get('/admin_top', [UserController::class, 'getAdminTop'])->name('admin_top');
 

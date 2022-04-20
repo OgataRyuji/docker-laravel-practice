@@ -9,14 +9,21 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
 
-use Illuminate\Pagination\Paginator;
-
-
 class ItemController extends Controller
 {
-	public function showitem()
+	private $item;
+	public function __construct()
 	{
-		$items = Item::orderBy('created_at', 'DESC')->paginate(4);
+		$this->item = new Item();
+		$this->comment = new Comment();
+	}
+	public function showitem(Request $request)
+	{
+
+    $searchTitle = $request->serch_title;
+		$searchExplain = $request->search_explain;
+
+		$items = $this->item->showItem($searchTitle, $searchExplain);
 		return view('items.index')->with('items',$items);
 	}
 
@@ -28,7 +35,6 @@ class ItemController extends Controller
 	public function postitem(Request $request)
 	{
 		$login_user = Session::get('user_id');
-    $item = new Item;
 
 		//バリデーション
 		$rules = [
@@ -37,11 +43,11 @@ class ItemController extends Controller
     ];
 		$this->validate($request, $rules);
 
-		$item->item_title = $request->item_title;
-    $item->item_explain = $request->item_explain;
-    $item->created_at = now();
-		$item->user_id = $login_user;
-    $item->save();
+		$item_title = $request->item_title;
+		$item_explain = $request->item_explain;
+		$created_at = now();
+		$user_id = $login_user;
+		$item = $this->item->insertItem($item_title, $item_explain, $created_at, $user_id);
 
 		return redirect('/index');
 	}
@@ -49,8 +55,8 @@ class ItemController extends Controller
 	public function getdetail()
 	{
     $item_id = $_GET['item_id'];
-		$item = Item::where('id',$item_id)->get();
-		$comments = Comment::where('item_id',$item_id)->orderBy('created_at', 'DESC')->get();
+		$item = $this->item->getItem($item_id);
+		$comments = $this->comment->itemDetailComment($item_id);
 		return view('items.detail')->with([
       'item'=>$item,
 			'comments'=>$comments
@@ -60,7 +66,7 @@ class ItemController extends Controller
 	public function getedit()
 	{
     $item_id = $_GET['item_id'];
-		$item = Item::where('id',$item_id)->get();
+		$item = $this->item->getItem($item_id);
 		return view('items.edit_item')->with('item',$item);
 	}
 
@@ -72,13 +78,12 @@ class ItemController extends Controller
 			'item_explain' => ['required','string']
     ];
 		$this->validate($request, $rules);
+		$item_id = $request->edit_item_id;
+		$item_title = $request->item_title;
+		$item_explain = $request->item_explain;
+		$created_at = now();
 
-    $item = Item::find($request->edit_item_id);
-		$item->item_title = $request->item_title;
-		$item->item_explain = $request->item_explain;
-		$item->created_at = now();
-		$item->user_id = Session::get('user_id');
-		$item->save();
+		$item = $this->item->updateItem($item_id, $item_title, $item_explain, $created_at);
 
 		return redirect('/index');
 	}
@@ -86,29 +91,22 @@ class ItemController extends Controller
 	public function getdelete()
 	{
     $item_id = $_GET['item_id'];
-		$item = Item::where('id',$item_id)->get();
+		$item = $this->item->getItem($item_id);
 		return view('items.delete')->with('item',$item);
 	}
 
 	public function deleteitem(Request $request)
 	{
-    Item::find($request->item_id)->delete();
+		$item_id = $request->item_id;
+		$item = $this->item->deleteItem($item_id);
 		return redirect('/index');
 	}
 
 	public function getmypage()
 	{
 		$user_id = $_GET['user_id'];
-		$items = Item::where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+    $items = $this->item->mypage($user_id);
 		return view('users.mypage')->with('items',$items);
-	}
-
-	public function searchItem(Request $request)
-	{
-		$searchTitle = $request->serch_title;
-		$searchExplain = $request->search_explain;
-		$items = Item::where('item_title','LIKE','%'.$searchTitle.'%')->where('item_explain','LIKE','%'.$searchExplain.'%')->orderBy('created_at', 'DESC')->paginate(4);
-		return view('items.index')->with('items',$items);
 	}
 
 	public function getAdminItem()
