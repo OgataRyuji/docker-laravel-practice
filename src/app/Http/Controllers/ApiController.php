@@ -37,6 +37,10 @@ class ApiController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * '/api/user'に'POST'形式でアクセスすると、'storeUser'メソッドが動く
+     * '/api/item'に'POST'形式でアクセスすると、'storeItem'メソッドが動く
+     * '/api/comment'に'POST'形式でアクセスすると、'storeComment'メソッドが動く
      */
     public function storeUser(Request $request)
     {
@@ -115,6 +119,10 @@ class ApiController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * '/api/user'に'GET'形式でアクセスすると、'showUser'メソッドが動く
+     * '/api/item'に'GET'形式でアクセスすると、'showUser'メソッドが動く
+     * '/api/comment'に'GET'形式でアクセスすると、'showUser'メソッドが動く
      */
     public function showUser(Request $request)
     {
@@ -143,6 +151,10 @@ class ApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * '/api/user'に'PUT'形式でアクセスすると、'updateUser'メソッドが動く
+     * '/api/item'に'PUT'形式でアクセスすると、'updateItem'メソッドが動く
+     * '/api/comment'に'PUT'形式でアクセスすると、'updateComment'メソッドが動く
      */
     public function updateUser(Request $request)
     {
@@ -221,6 +233,10 @@ class ApiController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * '/api/user'に'DELETE'形式でアクセスすると、'destroyUser'メソッドが動く
+     * '/api/item'に'DELETE'形式でアクセスすると、'destroyItem'メソッドが動く
+     * '/api/comment'に'DELETE'形式でアクセスすると、'destroyComment'メソッドが動く
      */
     public function destroyUser(Request $request)
     {
