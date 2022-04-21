@@ -89,11 +89,13 @@ class User extends Authenticatable
 
 		public function updateUser($user_id, $nickname, $password, $created_at)
 		{
-      return User::where('id',$user_id)->update([
+      User::where('id',$user_id)->update([
         'nickname'=> $nickname,
 				'password'=> Hash::make($password),
 				'created_at'=> $created_at,
 			]);
+
+      return User::where('id', $user_id)->get();
 		}
 
     public function getAllUser()

@@ -49,10 +49,12 @@ class Comment extends Model
 
 	public function updateComment($comment_id, $text, $created_at)
 	{
-		return Comment::where('id',$comment_id)->update([
+		Comment::where('id',$comment_id)->update([
       'text'=>$text,
 			'created_at'=>$created_at,
 		]);
+
+		return Comment::where('id', $comment_id)->get();
 	}
 
 	public function deleteComment($comment_id)

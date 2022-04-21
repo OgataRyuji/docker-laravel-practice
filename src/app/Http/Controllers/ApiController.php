@@ -38,25 +38,19 @@ class ApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
-     * '/api/user'に'POST'形式でアクセスすると、'storeUser'メソッドが動く
-     * '/api/item'に'POST'形式でアクセスすると、'storeItem'メソッドが動く
-     * '/api/comment'に'POST'形式でアクセスすると、'storeComment'メソッドが動く
+     * '/api/user'に'POST'形式でアクセスすると、'storeUser'メソッドが動く。'nickname','email','password'の入力必須
+     * '/api/item'に'POST'形式でアクセスすると、'storeItem'メソッドが動く。'item_title','item_explain','user_id'の入力必須
+     * '/api/comment'に'POST'形式でアクセスすると、'storeComment'メソッドが動く。'text','user_id','item_id'の入力必須
+     * 
      */
     public function storeUser(Request $request)
     {
-      //$user = new User;
 			$rules = [
 				'nickname' => ['required',  'string', 'min:5'],
 				'email' => ['required', 'email', 'unique:users'],
 				'password' => ['required', 'regex: /^[0-9a-zA-Z]{10,}$/']
 			];
 			$this->validate($request, $rules);
-      /*
-      $user->nickname = $request->nickname;
-      $user->email = $request->email;
-      $user->password = Hash::make($request->password);
-      $user->created_at = now();
-      $user->save(); */
 
       $nickname = $request->nickname;
       $email = $request->email;
@@ -69,18 +63,11 @@ class ApiController extends Controller
 
 		public function storeItem(Request $request)
     {
-      //$item = new Item;
       $rules = [
         'item_title' => ['required','string'],
         'item_explain' => ['required','string']
       ];
       $this->validate($request, $rules);
-      /*
-      $item->item_title = $request->item_title;
-      $item->item_explain = $request->item_explain;
-      $item->created_at = now();
-      $item->user_id = $request->user_id;
-      $item->save(); */
 
       $item_title = $request->item_title;
       $item_explain = $request->item_explain;
@@ -93,17 +80,10 @@ class ApiController extends Controller
 
 		public function storeComment(Request $request)
     {
-      //$comment = new Comment;
       $rules = [
         'text' => ['required','string'],
       ];
       $this->validate($request, $rules);
-      /*
-      $comment->text = $request->text;
-      $comment->created_at = now();
-      $comment->user_id = $request->user_id;
-      $comment->item_id = $request->item_id;
-      $comment->save(); */
 
       $text = $request->text;
       $created_at = now();
@@ -126,21 +106,18 @@ class ApiController extends Controller
      */
     public function showUser(Request $request)
     {
-			//$user = User::all();
       $user = $this->user->getAllUser();
 			return response()->json($user);
     }
 
 		public function showItem(Request $request)
     {
-      //$item = Item::all();
       $item = $this->item->getAllItem();
       return response()->json($item);
     }
 
 		public function showComment(Request $request)
     {
-      //$comment = Comment::all();
       $comment = $this->comment->getAllComment();
       return response()->json($comment);
     }
@@ -152,9 +129,9 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * '/api/user'に'PUT'形式でアクセスすると、'updateUser'メソッドが動く
-     * '/api/item'に'PUT'形式でアクセスすると、'updateItem'メソッドが動く
-     * '/api/comment'に'PUT'形式でアクセスすると、'updateComment'メソッドが動く
+     * '/api/user'に'PUT'形式でアクセスすると、'updateUser'メソッドが動く。'id','nickname','password'の入力必須
+     * '/api/item'に'PUT'形式でアクセスすると、'updateItem'メソッドが動く。'id','item_title','item_explain'の入力必須
+     * '/api/comment'に'PUT'形式でアクセスすると、'updateComment'メソッドが動く。'id','text'の入力必須
      */
     public function updateUser(Request $request)
     {
@@ -163,13 +140,6 @@ class ApiController extends Controller
 				'password' => ['required', 'regex: /^[0-9a-zA-Z]{10,}$/']
 			];
 			$this->validate($request, $rules);
-
-      /*
-			$user = User::find($request->id);
-      $user->nickname = $request->nickname;
-      $user->password = Hash::make($request->password);
-      $user->created_at = now();
-      $user->save(); */
 
       $user_id = $request->id;
       $nickname = $request->nickname;
@@ -188,14 +158,6 @@ class ApiController extends Controller
       ];
       $this->validate($request, $rules);
 
-      /*
-      $item = Item::find($request->id);
-      $item->item_title = $request->item_title;
-      $item->item_explain = $request->item_explain;
-      $item->created_at = now();
-      $item->user_id = $request->user_id;
-      $item->save(); */
-
       $item_id = $request->id;
       $item_title = $request->item_title;
       $item_explain = $request->item_explain;
@@ -213,12 +175,6 @@ class ApiController extends Controller
       ];
       $this->validate($request, $rules);
 
-      /*
-      $comment = Comment::find($request->id);
-      $comment->text = $request->text;
-      $comment->created_at = now();
-      $comment->save(); */
-
       $comment_id = $request->id;
       $text = $request->text;
       $created_at = now();
@@ -234,16 +190,12 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * '/api/user'に'DELETE'形式でアクセスすると、'destroyUser'メソッドが動く
-     * '/api/item'に'DELETE'形式でアクセスすると、'destroyItem'メソッドが動く
-     * '/api/comment'に'DELETE'形式でアクセスすると、'destroyComment'メソッドが動く
+     * '/api/user'に'DELETE'形式でアクセスすると、'destroyUser'メソッドが動く。'id'の入力必須
+     * '/api/item'に'DELETE'形式でアクセスすると、'destroyItem'メソッドが動く。'id'の入力必須
+     * '/api/comment'に'DELETE'形式でアクセスすると、'destroyComment'メソッドが動く。'id'の入力必須
      */
     public function destroyUser(Request $request)
     {
-      /*
-      $user = User::find($request->id);
-			$user->delete(); */
-
       $user_id = $request->id;
       $user = $this->user->deleteUser($user_id);
 			return response()->json($this->user->getAllUser());
@@ -251,10 +203,6 @@ class ApiController extends Controller
 
 		public function destroyItem(Request $request)
     {
-      /*
-      $item = Item::find($request->id);
-      $item->delete(); */
-
       $item_id = $request->id;
       $item = $this->item->deleteItem($item_id);
       return response()->json($this->item->getAllItem());
@@ -262,10 +210,6 @@ class ApiController extends Controller
 
 		public function destroyComment(Request $request)
     {
-      /*
-      $comment = Comment::find($request->id);
-      $comment->delete(); */
-
       $comment_id = $request->id;
       $comment = $this->comment->deleteComment($comment_id);
       return response()->json($this->comment->getAllComment());

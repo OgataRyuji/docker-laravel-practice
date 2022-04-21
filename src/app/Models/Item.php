@@ -48,11 +48,13 @@ class Item extends Model
 
 	public function updateItem($item_id, $item_title, $item_explain, $created_at)
 	{
-    return Item::where('id',$item_id)->update([
+    Item::where('id',$item_id)->update([
 			'item_title'=>$item_title,
 			'item_explain'=>$item_explain,
 			'created_at'=>$created_at,
 		]);
+
+		return Item::where('id', $item_id)->get();
 	}
 
 	public function deleteItem($item_id)
