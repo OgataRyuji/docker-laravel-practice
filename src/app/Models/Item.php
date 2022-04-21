@@ -66,4 +66,9 @@ class Item extends Model
     $items = Item::where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
 		return $items;
 	}
+
+	public function getAllItem()
+	{
+    return Item::all();
+	}
 }

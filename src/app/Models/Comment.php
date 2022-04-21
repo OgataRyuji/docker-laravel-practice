@@ -60,4 +60,9 @@ class Comment extends Model
     $comment = Comment::find($comment_id)->delete();
 		return  $comment;
 	}
+
+	public function getAllComment()
+	{
+      return Comment::all();
+	}
 }

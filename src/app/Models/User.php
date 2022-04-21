@@ -95,4 +95,14 @@ class User extends Authenticatable
 				'created_at'=> $created_at,
 			]);
 		}
+
+    public function getAllUser()
+    {
+      return User::all();
+    }
+
+    public function deleteUser($user_id)
+    {
+      return User::find($user_id)->delete();
+    }
 }
