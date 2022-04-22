@@ -16,6 +16,7 @@ class UserTest extends TestCase
       'nickname' => 'テストニックネーム',
       'email' => 'test@email.com',
       'password' => 'aaaaaaaaaa',
+      'created_at'=>now()
     ]);
     $response = $this->actingAs($user)->get('/registration_main_success');
     $response->assertStatus(200);
@@ -29,17 +30,9 @@ class UserTest extends TestCase
 
   public function test_postlogin()
 	{
-    /*$user = User::create([
-      'nickname' => 'テストニックネーム',
-      'email' => 'test@email.com',
-      'password' => bcrypt('bbbbbbbbbbb'),
-    ]);*/
-
-    //$this->assertFalse(Auth::check());
-
     $response = $this->post('/session', [
-      'email'    => 'nobodyknows2405@gmail.com',
-      'password' => 'xxxxxxxxxx'
+      'email'    => 'test@email.com',
+      'password' => 'aaaaaaaaaa'
       //先ほど設定したパスワードを入力
     ]);
 
@@ -48,10 +41,11 @@ class UserTest extends TestCase
 
   public function test_getedit()
 	{
-    $user = User::where('id', 56)->first(1);
-    $cookie = ['user_id'=>'56'];
-    $response = $this->actingAs($user)->withCookies($cookie)->call('get','/edit_user',[],$cookie);
-    $response->assertCookie($cookie);
+    $data = [
+      'nickname' => "ニックネームヘンコウ",
+      'password' => "aaaaaaaaaa"
+    ];
+    $response = $this->put(route('users.edit_user', ['id' => 2]),$data);
     $response->assertStatus(200);
 	}
 }
