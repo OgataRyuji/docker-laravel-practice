@@ -38,9 +38,10 @@ class TestBatch extends Command
 	 */
 	public function handle()
 	{
-		echo User::all();
+		//echo User::all();
 		for ($i=0; $i < 4; $i++) { 
-			echo "Hello!";
+			logger()->info("Hello!");
 		}
+		return 0;
 	}
 }

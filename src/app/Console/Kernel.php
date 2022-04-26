@@ -24,17 +24,23 @@ class Kernel extends ConsoleKernel
 	 * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
 	 * @return void
 	 */
+	/*
 	protected function schedule(Schedule $schedule)
 	{
 			// $schedule->command('inspire')->hourly();
 			//クロージャに直接処理を書くことも可能
-			$schedule->call(function(){
-				echo 'hello!\n';
-			});
+			//$schedule->call(function(){
+				//echo 'hello!\n';
+			//});
 
 			//batch::testを毎時実行し、出力先を$filePathに指定する
 			$filePath = '/src/storage/logs/laravel.log';
-			$schedule->command('batch:test')->sendOutputTo($filePath)->hourly();
+			$schedule->command('batch:test')->sendOutputTo($filePath)->everyMinute();
+	}*/
+	protected function schedule(Schedule $schedule)
+	{
+		$filePath = '/src/storage/logs/laravel.log';
+		$schedule->command('batch:test')->sendOutputTo($filePath)->everyTwoMinutes();
 	}
 
 	/**
