@@ -8,6 +8,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\ItemRequest;
 
 class ItemController extends Controller
 {
@@ -32,16 +33,16 @@ class ItemController extends Controller
 		return view('items.new');
 	}
 
-	public function postitem(Request $request)
+	public function postitem(ItemRequest $request)
 	{
 		$login_user = Session::get('user_id');
 
 		//バリデーション
-		$rules = [
+		/*$rules = [
 			'item_title' => ['required','string'],
 			'item_explain' => ['required','string']
     ];
-		$this->validate($request, $rules);
+		$this->validate($request, $rules); */
 
 		$item_title = $request->item_title;
 		$item_explain = $request->item_explain;
@@ -70,14 +71,14 @@ class ItemController extends Controller
 		return view('items.edit_item')->with('item',$item);
 	}
 
-	public function updateitem(Request $request)
+	public function updateitem(ItemRequest $request)
 	{
 		//バリデーション
-		$rules = [
+		/*$rules = [
 			'item_title' => ['required','string'],
 			'item_explain' => ['required','string']
     ];
-		$this->validate($request, $rules);
+		$this->validate($request, $rules); */
 		$item_id = $request->edit_item_id;
 		$item_title = $request->item_title;
 		$item_explain = $request->item_explain;

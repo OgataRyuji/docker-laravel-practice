@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Mail\SendRegistrationPreMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PreUserRequest;
 
 class Pre_userController extends Controller
 {
@@ -17,13 +18,13 @@ class Pre_userController extends Controller
 		$this->pre_user = new Pre_user();
 	}
 
-	public function addUserPre(Request $request)
+	public function addUserPre(PreUserRequest $request)
 	{
 		//バリデーション
-		$rules = [
+		/* $rules = [
 			'email' => ['required', 'email', 'unique:pre_users']
     ];
-    $this->validate($request, $rules);
+    $this->validate($request, $rules); */
 
 		$created_at = now();
 		$email = $request->email;

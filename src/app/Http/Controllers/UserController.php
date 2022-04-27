@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Mail\SendRegistrationMainMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\EditUserRequest;
 
 class UserController extends Controller
 {
@@ -16,14 +19,14 @@ class UserController extends Controller
 	{
 		$this->user = new User();
 	}
-  public function addUser(Request $request)
+  public function addUser(UserRequest $request)
   {
-    $rules = [
+    /*$rules = [
       'nickname' => ['required',  'string', 'min:5'],
       'email' => ['required', 'email', 'unique:users'],
       'password' => ['required', 'regex: /^[0-9a-zA-Z]{10,}$/']
     ];
-    $this->validate($request, $rules);
+    $this->validate($request, $rules); */
 
 		$nickname = $request->nickname;
     $password = $request->password;
@@ -40,12 +43,12 @@ class UserController extends Controller
 		return view('users.session');
 	}
 
-	public function postlogin(Request $request)
+	public function postlogin(LoginRequest $request)
 	{
-		$rules = [
+		/*$rules = [
 			'password' => ['required', 'regex: /^[0-9a-zA-Z]{10,}$/']
 		];
-		$this->validate($request, $rules);
+		$this->validate($request, $rules); */
 
 		$email = $request->email;
 		$password = $request->password;
@@ -64,14 +67,14 @@ class UserController extends Controller
 		return view('users.edit_user')->with('user',$user);
 	}
 
-	public function updateuser(Request $request)
+	public function updateuser(EditUserRequest $request)
 	{
 		//バリデーション
-		$rules = [
+		/*$rules = [
 			'nickname' => ['required',  'string', 'min:5'],
 			'password' => ['required', 'regex: /^[0-9a-zA-Z]{10,}$/']
 		];
-		$this->validate($request, $rules);
+		$this->validate($request, $rules); */
 
 		$user_id = $request->user_id;
 		$nickname = $request->nickname;
